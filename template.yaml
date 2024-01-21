@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: no-lib-vector-search
+Resources:
+  NoLibVectorSearchFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: vector_search/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Timeout: 25
+      MemorySize: 128
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          BEDROCK_REGION: us-east-1
+      Policies:
+        - Statement:
+            - Sid: "BedrockInvokePolicy"
+              Effect: "Allow"
+              Action: "bedrock:InvokeModel"
+              Resource: "arn:aws:bedrock:*::foundation-model/amazon.titan-embed-text-v1"
