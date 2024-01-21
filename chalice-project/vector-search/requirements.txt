@@ -1,0 +1,2 @@
+chalice-spec==0.7.0
+chalice-a4ab

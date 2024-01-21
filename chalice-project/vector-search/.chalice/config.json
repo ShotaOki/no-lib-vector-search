@@ -1,0 +1,14 @@
+{
+  "version": "2.0",
+  "app_name": "vector-search",
+  "stages": {
+    "dev": {
+      "api_gateway_stage": "api",
+      "autogen_policy": false,
+      "layers": [
+        "arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p311-boto3:6",
+        "arn:aws:lambda:us-east-1:770693421928:layer:Klayers-p311-pydantic:3"
+      ]
+    }
+  }
+}
