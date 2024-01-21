@@ -15,3 +15,35 @@ def text_to_vector(prompt: str):
         modelId="amazon.titan-embed-text-v1",
     )
     return json.loads(res["body"].read())["embedding"]
+
+
+def text_to_multimodal_vector(prompt: str):
+    """テキストをマルチモーダル向けにベクトル化する"""
+    res = runtime.invoke_model(
+        body=json.dumps(
+            {
+                "inputText": prompt,
+                "embeddingConfig": {"outputEmbeddingLength": 384},
+            }
+        ).encode("utf-8"),
+        contentType="application/json",
+        accept="application/json",
+        modelId="amazon.titan-embed-image-v1",
+    )
+    return json.loads(res["body"].read())["embedding"]
+
+
+def image_to_multimodal_vector(base64image: str):
+    """画像をマルチモーダル向けにベクトル化する"""
+    res = runtime.invoke_model(
+        body=json.dumps(
+            {
+                "inputImage": base64image,
+                "embeddingConfig": {"outputEmbeddingLength": 384},
+            }
+        ).encode("utf-8"),
+        contentType="application/json",
+        accept="application/json",
+        modelId="amazon.titan-embed-image-v1",
+    )
+    return json.loads(res["body"].read())["embedding"]

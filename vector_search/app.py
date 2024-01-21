@@ -31,7 +31,7 @@ def main(prompt: str, top_k: int = 3):
     prompt_vector = text_to_vector(prompt)
 
     # 最も似ているベクトルの上位k件を検出する
-    knn_index = nearest(prompt_vector, data_list, cosign_distance, top_k)
+    knn_index = nearest(prompt_vector, data_list, euclid_distance, top_k)
     for k in range(top_k):
         print(vecdata[index_list[knn_index[k]["index"]]]["data"])
 
@@ -40,7 +40,7 @@ def main(prompt: str, top_k: int = 3):
 
 
 def lambda_handler(event, context):
-    main("実をつけない木", top_k=3)
+    main("DK1200をモデルにしたアイドルは誰ですか", top_k=3)
 
     return {
         "statusCode": 200,
